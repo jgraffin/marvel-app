@@ -1,14 +1,35 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 
 export const Header = styled.header`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 20px;
   width: 100%;
+  background: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  box-shadow: 0 6px 10px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding-bottom: 16px;
+    padding-top: 16px;
+  }
 
   .App-logo {
-    display: block;
     height: auto;
     width: 96px;
 
@@ -21,18 +42,37 @@ export const Header = styled.header`
   .App-text {
     align-items: center;
     display: flex;
-    min-width: 300px;
+    justify-content: flex-end;
 
-    h2 {
-      font-size: 14px;
-      font-weight: 600;
+    &__name {
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: 769px) {
+        flex-direction: row;
+      }
+
+      h2 {
+        font-size: 12px;
+        font-weight: 600;
+
+        @media (min-width: 769px) {
+          font-size: 14px;
+          margin-right: 10px;
+        }
+      }
 
       strong {
         font-weight: 300;
+        font-size: 12px;
+
+        @media (min-width: 769px) {
+          font-size: 14px;
+        }
       }
     }
 
-    span {
+    &__logo {
       align-items: center;
       justify-content: center;
       display: flex;
@@ -51,7 +91,11 @@ export const Header = styled.header`
 export const Main = styled.main`
   display: flex;
   width: 100%;
-  background: #e5e5e5;
+  padding-top: 100px;
+
+  @media (max-width: 768px) {
+    padding-top: 90px;
+  }
 
   .container {
     margin: 0 auto;
@@ -79,6 +123,9 @@ export const Main = styled.main`
       }
 
       > li {
+        animation-name: ${slideIn};
+        animation-timing-function: cubic-bezier(2, 0, 0, 1);
+        animation-duration: 0.2s;
         width: 100%;
 
         button {
@@ -93,6 +140,10 @@ export const Main = styled.main`
           width: 100%;
           text-align: left;
           transition: ease-in-out 0.3s;
+
+          @media (max-width: 768px) {
+            padding: 12px 16px;
+          }
 
           &:hover {
             box-shadow: 0px 0px 10px #00000066;
@@ -115,6 +166,10 @@ export const Main = styled.main`
               top: -45px;
               font-size: 12px;
               color: #8e8e8e;
+
+              @media (max-width: 768px) {
+                top: -36px;
+              }
             }
           }
 
@@ -131,6 +186,26 @@ export const Main = styled.main`
               left: 0;
             }
           }
+        }
+
+        &:nth-child(2) {
+          animation-duration: 0.4s;
+        }
+
+        &:nth-child(3) {
+          animation-duration: 0.6s;
+        }
+
+        &:nth-child(4) {
+          animation-duration: 0.8s;
+        }
+
+        &:nth-child(5) {
+          animation-duration: 1s;
+        }
+
+        &:nth-child(6) {
+          animation-duration: 1.2s;
         }
       }
 
@@ -168,10 +243,72 @@ export const Main = styled.main`
         li {
           color: #555555;
           font-size: 14px;
-          line-height: 16px;
+          line-height: 18px;
+        }
+      }
+    }
+
+    .App-searchBar {
+      display: block;
+      margin-bottom: 60px;
+
+      @media (max-width: 768px) {
+        padding: 0 24px;
+        text-align: center;
+      }
+
+      h1 {
+        display: block;
+        color: #555555;
+        font-size: 24px;
+        margin-bottom: 10px;
+
+        @media (min-width: 769px) {
+          font-size: 32px;
+        }
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+
+        @media (min-width: 769px) {
+          width: 295px;
+        }
+
+        &::after {
+          content: "";
+          width: 34px;
+          height: 34px;
+          position: absolute;
+          bottom: -2px;
+          right: 2px;
+          opacity: 0.5;
+          background: url("/images/magnify.svg") no-repeat center center;
+        }
+
+        span {
+          color: #555555;
+          font-size: 14px;
+          font-weight: 600;
+          margin-bottom: 5px;
+
+          @media (min-width: 769px) {
+            font-size: 16px;
+          }
+        }
+
+        input {
+          padding: 10px 14px;
+          height: 32px;
+          width: 100%;
+          border-radius: 4px;
+          font-weight: lighter;
+          font-style: italic;
         }
       }
     }
   }
 `;
-export const Footer = styled.footer``;
